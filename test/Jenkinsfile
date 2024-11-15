@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clonar repositorio') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Verificar Ansible') {
+            steps {
+                sh './check_ansible.sh'
+            }
+        }
+    }
+}
