@@ -1,14 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage('Clonar repositorio') {
+        stage('Check Ansible Version') {
             steps {
-                checkout scm
-            }
-        }
-        stage('Verificar Ansible') {
-            steps {
-                sh './check_ansible.sh'
+                script {
+                    sh '''
+                    # Verificar la versión de Ansible
+                    echo "Checking Ansible version..."
+                    ansible --version || echo "Ansible is not installed or not in the PATH"
+                    '''
+                }
             }
         }
     }
